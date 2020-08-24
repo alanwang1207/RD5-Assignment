@@ -4,11 +4,12 @@ if (isset($_POST["okButton"])) {
     $userName = $_POST["userName"];
     echo $firstName;
     $passWord = base64_encode($_POST["passWord"]);
+    $cash = $_POST["cash"];
 
     if (trim(($userName && $passWord) != "")) {
         $sql = <<<sqlstate
-    insert into user (username,password)
-    values('$userName','$passWord')
+    insert into user (username,password,cash)
+    values('$userName','$passWord','$cash')
   sqlstate;
         require_once("config.php");
         mysqli_query($link, $sql);
@@ -30,7 +31,7 @@ if (isset($_POST["okButton"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RD5-註冊頁</title>
 </head>
 
 <body>
@@ -55,6 +56,12 @@ if (isset($_POST["okButton"])) {
             <label for="passWord" class="col-4 col-form-label">密碼</label>
             <div class="col-8">
                 <input id="passWord" name="passWord" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cash" class="col-4 col-form-label">存放金額</label>
+            <div class="col-8">
+                <input id="cash" name="cash" type="text" class="form-control">
             </div>
         </div>
         <div class="form-group row">
