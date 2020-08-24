@@ -51,7 +51,7 @@ if (isset($_POST["btnOK"])) {
 <html>
 
 <head>
-    <title>Lab - Login</title>
+    <title>RD5 - Login</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -80,7 +80,7 @@ if (isset($_POST["btnOK"])) {
                 <td colspan="2" align="center" bgcolor="#CCCCCC">
                     <input type="submit" class="btn btn-outline-success btn-md" name="btnOK" id="btnOK" value="登入" />
                     <input type="reset" class="btn btn-outline-secondary btn-md" name="btnReset" id="btnReset" value="重設" />
-                    <a href="./add.php" class="btn btn-outline-info btn-md float-right">加入會員</a>
+                    <a href="./add.php" class="btn btn-outline-info btn-md float-right">註冊會員</a>
                     <input class="btn btn-outline-primary btn-md" type="submit" name="btnHome" id="btnHome" value="回首頁" />
                 </td>
             </tr>
