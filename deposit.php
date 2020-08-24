@@ -13,12 +13,10 @@ if (!is_numeric($id))
 //echo $sql;
 require("config.php");
 if (isset($_POST["okButton"])) {
-    $username = $_POST["username"];
-    $password = base64_encode($_POST["password"]);
+    $cash= $_POST["cash"];
     $sql = <<<multi
     update user set
-       username = '$username',
-       password='$password'
+       cash = '$cash',
     where id = $id
   multi;
     $result = mysqli_query($link, $sql);
@@ -58,9 +56,9 @@ if (isset($_POST["okButton"])) {
 
         <form method="post">
             <div class="form-group row">
-                <label for="username" class="col-4 col-form-label">帳號:</label>
+                <label for="cash" class="col-4 col-form-label">金額:</label>
                 <div class="col-8">
-                    <input id="username" name="username" value="<?= $row["username"] ?>" type="text" class="form-control">
+                    <input id="cash" name="cash" value="<?= $row["cash"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">

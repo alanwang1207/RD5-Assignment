@@ -14,7 +14,7 @@ if (!isset($_SESSION["userName"])) {
 }
 require_once("config.php");
 $commandText = <<<SqlQuery
-select id,username,password from user where username='$sUserName';
+select id,username,password,cash from user where username='$sUserName';
 SqlQuery;
 
 $result = mysqli_query($link, $commandText);
@@ -33,7 +33,7 @@ $result = mysqli_query($link, $commandText);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lag - Member Page</title>
+  <title>RD5 - 會員頁</title>
 </head>
 
 <body>
@@ -43,7 +43,8 @@ $result = mysqli_query($link, $commandText);
       <p>This page for member only.</p>
       <span>
         <a href="index.php" class="btn btn-outline-primary">回首頁</a>
-        <a href="./edit.php?id=<?= $row["id"] ?>" class="btn btn-outline-success">修改會員資料</a>
+        <a href="./editcash.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">修改金額資料</a>
+        <a href="./editmember.php?id=<?= $row["id"] ?>" class="btn btn-outline-success">修改會員資料</a>
         <a href="./delete.php?id=<?= $row["id"] ?>" class="btn btn-outline-danger">刪除會員</a>
       </span>
       <table class="table table-striped">
@@ -52,6 +53,7 @@ $result = mysqli_query($link, $commandText);
             <th>會員編號</th>
             <th>帳號</th>
             <th>密碼</th>
+            <th>金額</th>
           </tr>
         </thead>
         <tbody>
@@ -59,6 +61,7 @@ $result = mysqli_query($link, $commandText);
             <td><?= $row["id"] ?></td>
             <td><?= $row["username"] ?></td>
             <td><?= base64_decode($row["password"]) ?></td>
+            <td><?= $row["cash"] ?></td>
           </tr>
 
         </tbody>
@@ -68,20 +71,3 @@ $result = mysqli_query($link, $commandText);
 </body>
 
 </html>
-<!-- 
-    <table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
-      <tr>
-        <td align="center" bgcolor="#CCCCCC">
-          <font color="#FFFFFF">會員系統 － 會員專用</font>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" valign="baseline">This page for member only.</td>
-      </tr>
-      
-    </table>
-
-  </form>
-</body>
-
-</html> -->
