@@ -13,17 +13,28 @@ if (!is_numeric($id))
 //echo $sql;
 require("config.php");
 if (isset($_POST["okButton"])) {
-    $cash= $_POST["cash"];
-    $sql = <<<multi
-    update user set
-       cash = '$cash',
-    where id = $id
-  multi;
-    $result = mysqli_query($link, $sql);
-    echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
-    //header("location: login.php");
-
-    exit();
+    $cash = (int)$_POST["cash"];
+    $dcash = (int)$_POST["dcash"];
+    if($cash>$dcash){
+        var_dump($decash);
+        $total = $cash - $dcash;
+        $sql = <<<multi
+        update user set
+           cash = '$total'
+        where id = $id
+      multi;
+        $result = mysqli_query($link, $sql);
+        echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
+        //header("location: login.php");
+    
+        exit();
+    }
+    else{
+        echo '<script language="javascript">';
+        echo 'alert("您的餘額不足")';
+        echo '</script>';
+    }
+    
 } else {
     $sql = <<<multi
     select * from user where id = $id
@@ -41,7 +52,7 @@ if (isset($_POST["okButton"])) {
 <html lang="en">
 
 <head>
-    <title>RD5-修改存款頁</title>
+    <title>RD5-提款頁</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -56,21 +67,21 @@ if (isset($_POST["okButton"])) {
 
         <form method="post">
             <div class="form-group row">
-                <label for="cash" class="col-4 col-form-label">金額:</label>
+                <label for="cash" class="col-4 col-form-label">目前餘額:</label>
                 <div class="col-8">
-                    <input id="cash" name="cash" value="<?= $row["cash"] ?>" type="text" class="form-control">
+                    <input id="cash" name="cash" value="<?= $row["cash"] ?>" type="text" class="form-control" readonly unselectable="on">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="password" class="col-4 col-form-label">密碼:</label>
+                <label for="dcash" class="col-4 col-form-label">提款金額:</label>
                 <div class="col-8">
-                    <input id="password" name="password" value="<?= base64_decode($row["password"]) ?>" type="text" class="form-control">
+                    <input id="dcash" name="dcash" value="<?= $row["dcash"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="offset-4 col-8">
-                    <button name="okButton" value="OK" type="submit" class="btn btn-primary">確認修改</button>
-                    <button name="cancelButton" value="Cancel" type="submit" class="btn btn-secondary">取消修改</button>
+                    <button name="okButton" value="OK" type="submit" class="btn btn-primary">確認</button>
+                    <button name="cancelButton" value="Cancel" type="submit" class="btn btn-secondary">取消</button>
                 </div>
             </div>
         </form>

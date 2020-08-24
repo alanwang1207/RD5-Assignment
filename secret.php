@@ -43,7 +43,8 @@ $result = mysqli_query($link, $commandText);
       <p>This page for member only.</p>
       <span>
         <a href="index.php" class="btn btn-outline-primary">回首頁</a>
-        <a href="./editcash.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">修改金額資料</a>
+        <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
+        <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
         <a href="./editmember.php?id=<?= $row["id"] ?>" class="btn btn-outline-success">修改會員資料</a>
         <a href="./delete.php?id=<?= $row["id"] ?>" class="btn btn-outline-danger">刪除會員</a>
       </span>
