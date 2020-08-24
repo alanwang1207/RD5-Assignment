@@ -39,7 +39,7 @@ $result = mysqli_query($link, $commandText);
 <body>
   <?php while ($row = mysqli_fetch_assoc($result)) { ?>
     <div class="container">
-      <h2>會員系統 － 會員專用</h2>
+      <h2>線上網銀系統 - 會員專用</h2>
       <p>This page for member only.</p>
       <span>
         <a href="index.php" class="btn btn-outline-primary">回首頁</a>

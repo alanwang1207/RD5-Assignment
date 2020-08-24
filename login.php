@@ -65,7 +65,7 @@ if (isset($_POST["btnOK"])) {
         <table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
             <tr>
                 <td colspan="2" align="center" bgcolor="#CCCCCC">
-                    <font color="#FFFFFF">會員系統 - 登入</font>
+                    <font color="#FFFFFF">線上網銀系統 - 登入</font>
                 </td>
             </tr>
             <tr>

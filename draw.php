@@ -15,7 +15,7 @@ require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $dcash = (int)$_POST["dcash"];
-    if($cash>$dcash){
+    if ($cash > $dcash) {
         var_dump($decash);
         $total = $cash - $dcash;
         $sql = <<<multi
@@ -26,15 +26,13 @@ if (isset($_POST["okButton"])) {
         $result = mysqli_query($link, $sql);
         echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
         //header("location: login.php");
-    
+
         exit();
-    }
-    else{
+    } else {
         echo '<script language="javascript">';
         echo 'alert("您的餘額不足")';
         echo '</script>';
     }
-    
 } else {
     $sql = <<<multi
     select * from user where id = $id
@@ -64,7 +62,7 @@ if (isset($_POST["okButton"])) {
 <body>
 
     <div class="container">
-
+        <h2>線上網銀系統 - 提款</h2>
         <form method="post">
             <div class="form-group row">
                 <label for="cash" class="col-4 col-form-label">目前餘額:</label>

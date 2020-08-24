@@ -14,7 +14,7 @@ if (!is_numeric($id))
 require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
-    
+
     $decash = (int)$_POST["decash"];
     var_dump($decash);
     $total = $cash + $decash;
@@ -57,7 +57,7 @@ if (isset($_POST["okButton"])) {
 <body>
 
     <div class="container">
-
+        <h2>線上網銀系統 - 存款</h2>
         <form method="post">
             <div class="form-group row">
                 <label for="cash" class="col-4 col-form-label">目前餘額:</label>
