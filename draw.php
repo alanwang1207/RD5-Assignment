@@ -15,30 +15,33 @@ require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $dcash = (int)$_POST["dcash"];
-    if ($cash > $dcash) {
-        var_dump($decash);
-        $total = $cash - $dcash;
-        $sql = <<<multi
-        update user set
-           cash = '$total'
-        where id = $id
-      multi;
-        $result = mysqli_query($link, $sql);
+    if ($dcash > 0) {
+        if ($cash > $dcash) {
+            // var_dump($decash);
+            $total = $cash - $dcash;
+            $sql = <<<multi
+            update user set
+               cash = '$total'
+            where id = $id
+          multi;
+            $result = mysqli_query($link, $sql);
 
-        $sql = <<<multi
-        insert into detail (uid,decash,dcash,cash,date )
-        values
-        ($id,0,$dcash,$total,current_timestamp() )
-      multi;
-        $result = mysqli_query($link, $sql);
-        echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
-        //header("location: login.php");
-
-        exit();
+            $sql = <<<multi
+            insert into detail (uid,decash,dcash,cash,date )
+            values
+            ($id,0,$dcash,$total,current_timestamp() )
+          multi;
+            $result = mysqli_query($link, $sql);
+            echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
+            //header("location: login.php");
+            exit();
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("您的餘額不足")';
+            echo '</script>';
+        }
     } else {
-        echo '<script language="javascript">';
-        echo 'alert("您的餘額不足")';
-        echo '</script>';
+        echo "<script> alert('金額輸入錯誤');location.replace('draw.php?id=$id');</script>";
     }
 } else {
     $sql = <<<multi

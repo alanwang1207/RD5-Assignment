@@ -14,27 +14,32 @@ if (!is_numeric($id))
 require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
-
     $decash = (int)$_POST["decash"];
-    // var_dump($decash);
-    $total = $cash + $decash;
-    $sql = <<<multi
+    if ($decash > 0) {
+        $total = $cash + $decash;
+        $sql = <<<multi
     update user set
        cash = '$total'
     where id = $id
-  multi;
-    $result = mysqli_query($link, $sql);
+    multi;
+        $result = mysqli_query($link, $sql);
 
-    $sql = <<<multi
+        $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
         ($id,$decash,0,$total,current_timestamp() )
       multi;
         $result = mysqli_query($link, $sql);
-    echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
-    //header("location: login.php");
+        echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
+        //header("location: login.php");
 
-    exit();
+        exit();
+    }else{
+        echo "<script> alert('金額輸入錯誤');location.replace('deposit.php?id=$id');</script>";
+    }
+    // var_dump($decash);
+
+
 } else {
     $sql = <<<multi
     select * from user where id = $id

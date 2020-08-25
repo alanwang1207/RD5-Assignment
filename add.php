@@ -6,7 +6,8 @@ if (isset($_POST["okButton"])) {
     $passWord = base64_encode($_POST["passWord"]);
     $cash = $_POST["cash"];
 
-    if (trim(($userName && $passWord) != "")) {
+    if (trim(($userName && $passWord ) != "" )) {
+        
         $sql = <<<sqlstate
     insert into user (username,password,cash)
     values('$userName','$passWord','$cash')
