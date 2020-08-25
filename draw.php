@@ -24,6 +24,13 @@ if (isset($_POST["okButton"])) {
         where id = $id
       multi;
         $result = mysqli_query($link, $sql);
+
+        $sql = <<<multi
+        insert into detail (uid,decash,dcash,cash,date )
+        values
+        ($id,0,$dcash,$total,current_timestamp() )
+      multi;
+        $result = mysqli_query($link, $sql);
         echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
         //header("location: login.php");
 

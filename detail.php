@@ -13,7 +13,7 @@ if (!is_numeric($id))
 //echo $sql;
 require("config.php");
 $sql = <<<multi
-    select decash,dcash,cash,date from detail d join user u on d.uid = u.id where uid = 1
+    select decash,dcash,cash,date from detail  where uid = $id
   multi;
 $result = mysqli_query($link, $sql);
 ?>

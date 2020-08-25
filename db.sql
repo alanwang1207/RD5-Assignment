@@ -12,10 +12,11 @@ CREATE TABLE `user` (
 CREATE TABLE `detail`(
   `did` int NOT NULL auto_increment primary key,
   `uid` int not null,
+  `cash` int,
   `decash` int default 0,
   `dcash` int default 0,
   `date` varchar(20),
-  FOREIGN KEY (`uid`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`uid`) REFERENCES `user`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -24,7 +25,7 @@ INSERT INTO `user` (`id`,`username`,`password`,`cash`) VALUES
 (2,'bbb','222',0);
 
 
-INSERT INTO `detail` (`uid`,`decash`,`dcash`,`date`) VALUES
+INSERT INTO `detail` (`uid`,`decash`,`dcash`,`cash`,`date`) VALUES
 (1,100,0,current_timestamp()),
 (1,100,0,current_timestamp()),
 (1,100,0,current_timestamp()),
