@@ -1,23 +1,22 @@
-create database test1;
+create database test2;
 
-use test1;
+use test2;
 
 CREATE TABLE `user` (
   `id` int NOT NULL auto_increment primary key,
   `username` varchar(20) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `cash` int default 0
+  `cash` int 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `detail`(
   `did` int NOT NULL auto_increment primary key,
   `uid` int not null,
-  `cash` int not null,
   `decash` int default 0,
   `dcash` int default 0,
-  FOREIGN KEY (`uid`) REFERENCES user(`id`),
-  FOREIGN KEY (`cash`) REFERENCES user(`cash`)
+  FOREIGN KEY (`uid`) REFERENCES `user`(`id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 INSERT INTO `user` (`id`,`username`,`password`,`cash`) VALUES
 (1,'aaa','111',111),

@@ -19,7 +19,7 @@ mysqli_query($link, "set names utf-8");
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = 'root';
-$dbname = 'test1';
+$dbname = 'test2';
 $port = 8889;
 $link = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $port);
 mysqli_query($link, "set names utf-8");

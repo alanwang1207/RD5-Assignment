@@ -16,7 +16,7 @@ if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
 
     $decash = (int)$_POST["decash"];
-    var_dump($decash);
+    // var_dump($decash);
     $total = $cash + $decash;
     $sql = <<<multi
     update user set
