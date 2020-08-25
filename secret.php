@@ -45,6 +45,7 @@ $result = mysqli_query($link, $commandText);
         <a href="index.php" class="btn btn-outline-primary">回首頁</a>
         <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
         <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
+        <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
         <a href="./editmember.php?id=<?= $row["id"] ?>" class="btn btn-outline-success">修改會員資料</a>
         <a href="./delete.php?id=<?= $row["id"] ?>" class="btn btn-outline-danger">刪除會員</a>
       </span>

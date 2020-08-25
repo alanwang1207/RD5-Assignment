@@ -14,6 +14,7 @@ CREATE TABLE `detail`(
   `uid` int not null,
   `decash` int default 0,
   `dcash` int default 0,
+  `date` varchar(20),
   FOREIGN KEY (`uid`) REFERENCES `user`(`id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -21,3 +22,18 @@ CREATE TABLE `detail`(
 INSERT INTO `user` (`id`,`username`,`password`,`cash`) VALUES
 (1,'aaa','111',111),
 (2,'bbb','222',0);
+
+
+INSERT INTO `detail` (`uid`,`decash`,`dcash`,`date`) VALUES
+(1,100,0,current_timestamp()),
+(1,100,0,current_timestamp()),
+(1,100,0,current_timestamp()),
+(2,0,200,current_timestamp()),
+(2,50,0,current_timestamp()),
+(2,0,100,current_timestamp());
+
+
+
+select decash,dcash,cash,date from detail d join user u on d.uid = u.id where uid = 1
+
+select cid,username,dis from customer c join block_list b on c.cid = b.bid ;
