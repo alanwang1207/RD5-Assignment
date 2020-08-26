@@ -32,20 +32,24 @@ if (isset($_POST["member"])) {
 
     <div class="container">
         <h2>線上網銀系統 - 首頁</h2>
+        <p><td align="center" bgcolor="#CCCCCC"><?php echo "Hello~ " . $sUserName ?> </td></p>
+            
         <span>
             <?php if ($sUserName == "Guest") : ?>
                 <a href="login.php" class="btn btn-outline-success btn-md">登入</a>
             <?php else : ?>
-                <a href="login.php?logout=1" class="btn btn-outline-warning btn-md">登出</a>
+                <a href="login.php?logout=1" class="btn btn-outline-secondary btn-md">登出</a>
             <?php endif; ?>
+                <td>
+                <a href="secret.php" id="member" type="submit" class="btn btn-outline-info">戶頭管理</a>
+                <a href="member.php" id="member" type="submit" class="btn btn-outline-success">會員中心</a>
 
-            <a href="secret.php" id="member" type="submit" class="btn btn-outline-info">會員專用頁</a></td>
+                </td>
+            
 
         </span>
 
-        <tr>
-            <td align="center" bgcolor="#CCCCCC"><?php echo "Hello~ " . $sUserName ?> </td>
-        </tr>
+        
         <img src="dog.png" class="rounded-circle img-thumbnail mx-auto d-block" alt="Cinque Terre" style="width:20%">
         </table>
 
