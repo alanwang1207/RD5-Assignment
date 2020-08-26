@@ -15,31 +15,22 @@ require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $decash = (int)$_POST["decash"];
-    if ($decash > 0) {
-        $total = $cash + $decash;
-        $sql = <<<multi
+    $total = $cash + $decash;
+    $sql = <<<multi
     update user set
        cash = '$total'
     where id = $id
     multi;
-        $result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
-        $sql = <<<multi
+    $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
         ($id,$decash,0,$total,current_timestamp() )
       multi;
-        $result = mysqli_query($link, $sql);
-        echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
-        //header("location: login.php");
-
-        exit();
-    }else{
-        echo "<script> alert('金額輸入錯誤');location.replace('deposit.php?id=$id');</script>";
-    }
-    // var_dump($decash);
-
-
+    $result = mysqli_query($link, $sql);
+    echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
+    exit();
 } else {
     $sql = <<<multi
     select * from user where id = $id
@@ -48,10 +39,7 @@ if (isset($_POST["okButton"])) {
     $row = mysqli_fetch_assoc($result);
 }
 
-//var_dump($row);
-// header("location: index.php");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +68,7 @@ if (isset($_POST["okButton"])) {
             <div class="form-group row">
                 <label for="decash" class="col-4 col-form-label">存放金額:</label>
                 <div class="col-8">
-                    <input id="decash" name="decash" value="<?= $row["decash"] ?>" type="text" class="form-control">
+                    <input pattern="^\+?[1-9][0-9]*$" id="decash" name="decash" value="<?= $row["decash"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">

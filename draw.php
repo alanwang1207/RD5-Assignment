@@ -15,33 +15,30 @@ require("config.php");
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $dcash = (int)$_POST["dcash"];
-    if ($dcash > 0) {
-        if ($cash > $dcash) {
-            // var_dump($decash);
-            $total = $cash - $dcash;
-            $sql = <<<multi
+
+    if ($cash > $dcash) {
+        // var_dump($decash);
+        $total = $cash - $dcash;
+        $sql = <<<multi
             update user set
                cash = '$total'
             where id = $id
           multi;
-            $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
-            $sql = <<<multi
+        $sql = <<<multi
             insert into detail (uid,decash,dcash,cash,date )
             values
             ($id,0,$dcash,$total,current_timestamp() )
           multi;
-            $result = mysqli_query($link, $sql);
-            echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
-            //header("location: login.php");
-            exit();
-        } else {
-            echo '<script language="javascript">';
-            echo 'alert("您的餘額不足")';
-            echo '</script>';
-        }
+        $result = mysqli_query($link, $sql);
+        echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
+        //header("location: login.php");
+        exit();
     } else {
-        echo "<script> alert('金額輸入錯誤');location.replace('draw.php?id=$id');</script>";
+        echo '<script language="javascript">';
+        echo 'alert("您的餘額不足")';
+        echo '</script>';
     }
 } else {
     $sql = <<<multi
@@ -83,7 +80,7 @@ if (isset($_POST["okButton"])) {
             <div class="form-group row">
                 <label for="dcash" class="col-4 col-form-label">提款金額:</label>
                 <div class="col-8">
-                    <input id="dcash" name="dcash" value="<?= $row["dcash"] ?>" type="text" class="form-control">
+                    <input pattern="^\+?[1-9][0-9]*$" id="dcash" name="dcash" value="<?= $row["dcash"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">

@@ -49,20 +49,20 @@ if (isset($_POST["okButton"])) {
                             <i class="fa fa-address-card"></i>
                         </div>
                     </div>
-                    <input id="userName" name="userName" type="text" class="form-control">
+                    <input pattern ="^[A-Za-z0-9]+$"  id="userName" name="userName" type="text" class="form-control">
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="passWord" class="col-4 col-form-label">密碼</label>
             <div class="col-8">
-                <input id="passWord" name="passWord" type="text" class="form-control">
+                <input pattern ="^[A-Za-z0-9]+$" id="passWord" name="passWord" type="text" class="form-control">
             </div>
         </div>
         <div class="form-group row">
             <label for="cash" class="col-4 col-form-label">存放金額</label>
             <div class="col-8">
-                <input id="cash" name="cash" type="text" class="form-control">
+                <input pattern="^\d+$" id="cash" name="cash" type="text" class="form-control">
             </div>
         </div>
         <div class="form-group row">
