@@ -4,15 +4,15 @@ if (isset($_POST["okButton"])) {
     $userName = $_POST["userName"];
     echo $firstName;
     $passWord = base64_encode($_POST["passWord"]);
-    $cash = $_POST["tid"];
-    $cash = $_POST["email"];
+    $tid = $_POST["tid"];
+    $email = $_POST["email"];
     $cash = $_POST["cash"];
 
     if (trim(($userName && $passWord ) != "" )) {
         
         $sql = <<<sqlstate
     insert into user (username,password,tid,email,cash)
-    values('$userName','$passWord','$cash')
+    values('$userName','$passWord','$tid','$email','$cash')
   sqlstate;
         require_once("config.php");
         mysqli_query($link, $sql);
@@ -64,7 +64,7 @@ if (isset($_POST["okButton"])) {
         <div class="form-group row">
             <label for="tid" class="col-4 col-form-label">身分證</label>
             <div class="col-8">
-                <input pattern="/^[a-zA-Z][0-9]{9}$/" id="tid" name="tid" type="text" class="form-control" >
+                <input pattern="^[a-zA-Z0-9 ]+$" id="tid" name="tid" type="text" class="form-control" >
             </div>
         </div>
         <div class="form-group row">

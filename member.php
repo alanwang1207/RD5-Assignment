@@ -14,7 +14,7 @@ if (!isset($_SESSION["userName"])) {
 }
 require_once("config.php");
 $commandText = <<<SqlQuery
-select id,username,password,cash from user where username='$sUserName';
+select id,username,password,email from user where username='$sUserName';
 SqlQuery;
 
 $result = mysqli_query($link, $commandText);
@@ -52,6 +52,7 @@ $result = mysqli_query($link, $commandText);
                         <th>會員編號</th>
                         <th>帳號</th>
                         <th>密碼</th>
+                        <th>信箱</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,8 +60,8 @@ $result = mysqli_query($link, $commandText);
                         <td><?= $row["id"] ?></td>
                         <td><?= $row["username"] ?></td>
                         <td><?= base64_decode($row["password"]) ?></td>
+                        <td><?= $row["email"] ?></td>
                     </tr>
-
                 </tbody>
             </table>
         </div>
