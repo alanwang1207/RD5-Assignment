@@ -14,8 +14,20 @@ if (!isset($_SESSION["userName"])) {
 }
 require_once("config.php");
 $commandText = <<<SqlQuery
-select id,username,password,cash from user where username='$sUserName';
-SqlQuery;
+  select id,username,password,cash from user where username='$sUserName';
+  SqlQuery;
+// 判斷屏蔽
+// if (isset($_POST["hide"])) {
+//   $commandText = <<<SqlQuery
+// select id,username from user where username='$sUserName';
+// SqlQuery;
+// } else {
+//   // header("Location: index.php");
+//   $commandText = <<<SqlQuery
+//   select id,username,password,cash from user where username='$sUserName';
+//   SqlQuery;
+// }
+
 
 $result = mysqli_query($link, $commandText);
 // var_dump($result);
@@ -37,34 +49,37 @@ $result = mysqli_query($link, $commandText);
 </head>
 
 <body>
-  <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-    <div class="container">
-      <h2>線上網銀系統 - 戶頭管理</h2>
-      <p>This page for member only.</p>
-      <span>
-        <a href="index.php" class="btn btn-outline-primary">回首頁</a>
-        <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
-        <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
-        <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
-      </span>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>會員編號</th>
-            <th>帳號</th>
-            <th>金額</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><?= $row["id"] ?></td>
-            <td><?= $row["username"] ?></td>
-            <td><?= $row["cash"] ?></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <?php } ?>
+  <form method="post">
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+      <div class="container">
+        <h2>線上網銀系統 - 戶頭管理</h2>
+        <p>This page for member only.</p>
+        <span>
+          <a href="index.php" class="btn btn-outline-primary">回首頁</a>
+          <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
+          <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
+          <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
+          <button name="hide" id="hide" type="submit" class="btn btn-outline-dark">*</button>
+        </span>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>會員編號</th>
+              <th>帳號</th>
+              <th>金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><?= $row["id"] ?></td>
+              <td><?= $row["username"] ?></td>
+              <td><?= $row["cash"] ?></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <?php } ?>
+  </form>
 </body>
 
 </html>
