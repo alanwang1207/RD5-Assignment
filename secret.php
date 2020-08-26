@@ -33,7 +33,12 @@ $result = mysqli_query($link, $commandText);
 // var_dump($result);
 
 ?>
-
+<style>
+  .main
+{
+  display:block;font-size:0;line-height:0;text-indent:-9999px;
+}
+</style>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -59,26 +64,31 @@ $result = mysqli_query($link, $commandText);
           <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
           <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
           <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
-          <button name="hide" id="hide" type="submit" class="btn btn-outline-dark">*</button>
+          <input class="btn btn-outline-dark" type="button" value="*" onclick="HideCash(2)">
         </span>
         <table class="table table-striped">
           <thead>
             <tr>
               <th>會員編號</th>
               <th>帳號</th>
-              <th>金額</th>
+              <th class="hide">金額</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><?= $row["id"] ?></td>
               <td><?= $row["username"] ?></td>
-              <td><?= $row["cash"] ?></td>
+              <td class="hide"><?= $row["cash"] ?></td>
             </tr>
           </tbody>
         </table>
       </div>
     <?php } ?>
+    <script language="javascript">
+      $("input").click(function() {
+        $(".hide").toggleClass("main");
+      });
+    </script>
   </form>
 </body>
 
