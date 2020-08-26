@@ -22,9 +22,9 @@ CREATE TABLE `detail`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `user` (`id`,`username`,`password`,`cash`) VALUES
-(1,'aaa','111',111),
-(2,'bbb','222',0);
+INSERT INTO `user` (`id`,`username`,`password`,`tid`,`email`,`cash`) VALUES
+(1,'aaa','111','A123456789','aaa111@gmail.com',111),
+(2,'bbb','222','B123456789','bbb222@gmail.com',0);
 
 
 INSERT INTO `detail` (`uid`,`decash`,`dcash`,`cash`,`date`) VALUES
