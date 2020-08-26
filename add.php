@@ -51,14 +51,14 @@ if (isset($_POST["okButton"])) {
                             <i class="fa fa-address-card"></i>
                         </div>
                     </div>
-                    <input pattern ="^[A-Za-z0-9]+${8,}"  id="userName" name="userName" type="text" class="form-control" placeholder="請勿輸入中文">
+                    <input pattern ="^[A-Za-z0-9]+$"  id="userName" name="userName" type="text" class="form-control" placeholder="請勿輸入中文">
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="passWord" class="col-4 col-form-label">密碼</label>
             <div class="col-8">
-                <input pattern ="^[A-Za-z0-9]+${8,}" id="passWord" name="passWord" type="text" class="form-control" placeholder="請勿輸入中文,最少８碼">
+                <input pattern ="^[A-Za-z0-9]+$" id="passWord" name="passWord" type="text" class="form-control" placeholder="請勿輸入中文">
             </div>
         </div>
         <div class="form-group row">

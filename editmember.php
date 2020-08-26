@@ -24,7 +24,7 @@ if (isset($_POST["okButton"])) {
     where id = $id
   multi;
     $result = mysqli_query($link, $sql);
-    // echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
+     echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
     //header("location: login.php");
 
     exit();
@@ -62,13 +62,13 @@ if (isset($_POST["okButton"])) {
             <div class="form-group row">
                 <label for="username" class="col-4 col-form-label">帳號:</label>
                 <div class="col-8">
-                    <input pattern ="^[A-Za-z0-9]+${8,}" id="username" name="username" value="<?= $row["username"] ?>" type="text" class="form-control">
+                    <input pattern ="^[A-Za-z0-9]+$" id="username" name="username" value="<?= $row["username"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="password" class="col-4 col-form-label">密碼:</label>
                 <div class="col-8">
-                    <input pattern ="^[A-Za-z0-9]+${8,}" id="password" name="password" value="<?= base64_decode($row["password"]) ?>" type="text" class="form-control">
+                    <input pattern ="^[A-Za-z0-9]+$" id="password" name="password" value="<?= base64_decode($row["password"]) ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
