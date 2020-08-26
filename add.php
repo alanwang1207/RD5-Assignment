@@ -4,12 +4,14 @@ if (isset($_POST["okButton"])) {
     $userName = $_POST["userName"];
     echo $firstName;
     $passWord = base64_encode($_POST["passWord"]);
+    $cash = $_POST["tid"];
+    $cash = $_POST["email"];
     $cash = $_POST["cash"];
 
     if (trim(($userName && $passWord ) != "" )) {
         
         $sql = <<<sqlstate
-    insert into user (username,password,cash)
+    insert into user (username,password,tid,email,cash)
     values('$userName','$passWord','$cash')
   sqlstate;
         require_once("config.php");
@@ -49,20 +51,32 @@ if (isset($_POST["okButton"])) {
                             <i class="fa fa-address-card"></i>
                         </div>
                     </div>
-                    <input pattern ="^[A-Za-z0-9]+$"  id="userName" name="userName" type="text" class="form-control">
+                    <input pattern ="^[A-Za-z0-9]+${8,}"  id="userName" name="userName" type="text" class="form-control" placeholder="請勿輸入中文">
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="passWord" class="col-4 col-form-label">密碼</label>
             <div class="col-8">
-                <input pattern ="^[A-Za-z0-9]+$" id="passWord" name="passWord" type="text" class="form-control">
+                <input pattern ="^[A-Za-z0-9]+${8,}" id="passWord" name="passWord" type="text" class="form-control" placeholder="請勿輸入中文,最少８碼">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tid" class="col-4 col-form-label">身分證</label>
+            <div class="col-8">
+                <input pattern="/^[a-zA-Z][0-9]{9}$/" id="tid" name="tid" type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-4 col-form-label">Email</label>
+            <div class="col-8">
+                <input pattern="^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" id="email" name="email" type="text" class="form-control" >
             </div>
         </div>
         <div class="form-group row">
             <label for="cash" class="col-4 col-form-label">存放金額</label>
             <div class="col-8">
-                <input pattern="^\d+$" id="cash" name="cash" type="text" class="form-control">
+                <input pattern="^\d+$" id="cash" name="cash" type="text" class="form-control" placeholder="最少1000">
             </div>
         </div>
         <div class="form-group row">

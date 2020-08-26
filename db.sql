@@ -6,6 +6,8 @@ CREATE TABLE `user` (
   `id` int NOT NULL auto_increment primary key,
   `username` varchar(20) NOT NULL,
   `password` varchar(30) NOT NULL,
+  `tid` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `cash` int 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
