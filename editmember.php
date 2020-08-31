@@ -16,18 +16,28 @@ if (isset($_POST["okButton"])) {
     $username = $_POST["username"];
     $password = base64_encode($_POST["password"]);
     $email = $_POST["email"];
-    $sql = <<<multi
-    update user set
-       username = '$username',
-       password='$password',
-       email='$email'
-    where id = $id
-  multi;
+    $sql = <<<sqlstate
+    select username from user where username = '$username';
+  sqlstate;
     $result = mysqli_query($link, $sql);
-     echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
-    //header("location: login.php");
+    $count = mysqli_num_rows($result);
+    if ($count > 0) {
 
-    exit();
+        echo "<script> alert('帳號名稱已被使用，請重新輸入');location.replace('member.php');</script>";
+    } else {
+        $sql = <<<multi
+        update user set
+           username = '$username',
+           password='$password',
+           email='$email'
+        where id = $id
+      multi;
+        $result = mysqli_query($link, $sql);
+        echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
+        //header("location: login.php");
+
+        exit();
+    }
 } else {
     $sql = <<<multi
     select * from user where id = $id
@@ -62,13 +72,13 @@ if (isset($_POST["okButton"])) {
             <div class="form-group row">
                 <label for="username" class="col-4 col-form-label">帳號:</label>
                 <div class="col-8">
-                    <input pattern ="^[A-Za-z0-9]+$" id="username" name="username" value="<?= $row["username"] ?>" type="text" class="form-control">
+                    <input pattern="^[A-Za-z0-9]+$" id="username" name="username" value="<?= $row["username"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="password" class="col-4 col-form-label">密碼:</label>
                 <div class="col-8">
-                    <input pattern ="^[A-Za-z0-9]+$" id="password" name="password" value="<?= base64_decode($row["password"]) ?>" type="text" class="form-control">
+                    <input pattern="^[A-Za-z0-9]+$" id="password" name="password" value="<?= base64_decode($row["password"]) ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">

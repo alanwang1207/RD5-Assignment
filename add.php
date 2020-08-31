@@ -7,21 +7,31 @@ if (isset($_POST["okButton"])) {
     $tid = $_POST["tid"];
     $email = $_POST["email"];
     $cash = $_POST["cash"];
-
-    if (trim(($userName && $passWord ) != "" )) {
-        
-        $sql = <<<sqlstate
-    insert into user (username,password,tid,email,cash)
-    values('$userName','$passWord','$tid','$email','$cash')
-  sqlstate;
-        require_once("config.php");
-        mysqli_query($link, $sql);
-        echo "<script> alert('加入成功，請重新登入');location.replace('login.php');</script>";
+    //驗證帳號唯一
+    $sql = <<<sqlstate
+select username from user where username = '$userName';
+sqlstate;
+    require_once("config.php");
+    $result = mysqli_query($link, $sql);
+    $count = mysqli_num_rows($result);
+    if ($count > 0) {
+        echo "<script> alert('帳號名稱已被使用，請重新輸入');location.replace('add.php');</script>";
     } else {
-        // 使用js語法
-        echo '<script language="javascript">';
-        echo 'alert("帳號或密碼請輸入完整")';
-        echo '</script>';
+        if (trim(($userName && $passWord) != "")) {
+
+            $sql = <<<sqlstate
+        insert into user (username,password,tid,email,cash)
+        values('$userName','$passWord','$tid','$email','$cash')
+      sqlstate;
+            require_once("config.php");
+            mysqli_query($link, $sql);
+            echo "<script> alert('加入成功，請重新登入');location.replace('login.php');</script>";
+        } else {
+            // 使用js語法
+            echo '<script language="javascript">';
+            echo 'alert("帳號或密碼請輸入完整")';
+            echo '</script>';
+        }
     }
 }
 ?>
@@ -51,26 +61,26 @@ if (isset($_POST["okButton"])) {
                             <i class="fa fa-address-card"></i>
                         </div>
                     </div>
-                    <input pattern ="^[A-Za-z0-9]+$"  id="userName" name="userName" type="text" class="form-control" placeholder="請勿輸入中文">
+                    <input pattern="^[A-Za-z0-9]+$" id="userName" name="userName" type="text" class="form-control" placeholder="請勿輸入中文">
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="passWord" class="col-4 col-form-label">密碼</label>
             <div class="col-8">
-                <input pattern ="^[A-Za-z0-9]+$" id="passWord" name="passWord" type="text" class="form-control" placeholder="請勿輸入中文">
+                <input pattern="^[A-Za-z0-9]+$" id="passWord" name="passWord" type="text" class="form-control" placeholder="請勿輸入中文">
             </div>
         </div>
         <div class="form-group row">
             <label for="tid" class="col-4 col-form-label">身分證</label>
             <div class="col-8">
-                <input pattern="^[a-zA-Z0-9 ]+$" id="tid" name="tid" type="text" class="form-control" >
+                <input pattern="^[a-zA-Z0-9 ]+$" id="tid" name="tid" type="text" class="form-control">
             </div>
         </div>
         <div class="form-group row">
             <label for="email" class="col-4 col-form-label">Email</label>
             <div class="col-8">
-                <input pattern="^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" id="email" name="email" type="text" class="form-control" >
+                <input pattern="^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" id="email" name="email" type="text" class="form-control">
             </div>
         </div>
         <div class="form-group row">
