@@ -51,8 +51,16 @@ $result = mysqli_query($link, $sql);
                     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
 
-                            <td><?= $row["decash"] ?></td>
-                            <td><?= $row["dcash"] ?></td>
+                            <?php if ($row["decash"] == '0') : ?>
+                                <td><?= '-' ?></td>
+                            <?php else : ?>
+                                <td><?= $row["decash"] ?></td>
+                            <?php endif; ?>
+                            <?php if ($row["dcash"] == '0') : ?>
+                                <td><?= '-' ?></td>
+                            <?php else : ?>
+                                <td><?= $row["dcash"] ?></td>
+                            <?php endif; ?>
                             <td><?= $row["cash"] ?></td>
                             <td><?= $row["date"] ?></td>
                         </tr>
