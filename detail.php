@@ -1,17 +1,24 @@
 <?php
+//按下取消返回秘密頁
 if (isset($_POST["cancelButton"])) {
     header("location: secret.php");
     exit();
 }
+
+//不存在id印出找不到
 if (!isset($_GET["id"])) {
     die("id not found.");
 }
+
+//判斷變數是否為數字或數字的字串
 $id = $_GET["id"];
 if (!is_numeric($id))
     die("id not a number.");
 
-//echo $sql;
+//引入資料庫配置
 require("config.php");
+
+//秀出明細
 $sql = <<<multi
     select decash,dcash,cash,date from detail  where uid = $id
   multi;
