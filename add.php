@@ -1,5 +1,6 @@
+<!-- 新增會員 -->
 <?php
-
+//按下確定送出表單內容
 if (isset($_POST["okButton"])) {
     $userName = $_POST["userName"];
     echo $firstName;
@@ -7,7 +8,8 @@ if (isset($_POST["okButton"])) {
     $tid = $_POST["tid"];
     $email = $_POST["email"];
     $cash = $_POST["cash"];
-    //驗證帳號唯一
+
+    //驗證帳號唯一 
     $sql = <<<sqlstate
 select username from user where username = '$userName';
 sqlstate;
@@ -17,13 +19,12 @@ sqlstate;
     if ($count > 0) {
         echo "<script> alert('帳號名稱已被使用，請重新輸入');location.replace('add.php');</script>";
     } else {
+        //看是否有空值
         if (trim(($userName && $passWord) != "")) {
-
             $sql = <<<sqlstate
         insert into user (username,password,tid,email,cash)
         values('$userName','$passWord','$tid','$email','$cash')
       sqlstate;
-            require_once("config.php");
             mysqli_query($link, $sql);
             echo "<script> alert('加入成功，請重新登入');location.replace('login.php');</script>";
         } else {
