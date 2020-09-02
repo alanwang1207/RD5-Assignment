@@ -1,21 +1,30 @@
 <?php
+//按下取消返回秘密頁
 if (isset($_POST["cancelButton"])) {
     header("location: secret.php");
     exit();
 }
+
+//不存在id印出找不到
 if (!isset($_GET["id"])) {
     die("id not found.");
 }
 $id = $_GET["id"];
+
+//判斷變數是否為數字或數字的字串
 if (!is_numeric($id))
     die("id not a number.");
 
-//echo $sql;
+//引入資料庫配置
 require("config.php");
+
+//按下送出取得表單內容
 if (isset($_POST["okButton"])) {
     $username = $_POST["username"];
     $password = base64_encode($_POST["password"]);
     $email = $_POST["email"];
+
+    //驗證帳號名稱是否使用
     $sql = <<<sqlstate
     select username from user where username = '$username';
   sqlstate;
@@ -34,8 +43,6 @@ if (isset($_POST["okButton"])) {
       multi;
         $result = mysqli_query($link, $sql);
         echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
-        //header("location: login.php");
-
         exit();
     }
 } else {
@@ -45,9 +52,6 @@ if (isset($_POST["okButton"])) {
     $result = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($result);
 }
-
-//var_dump($row);
-// header("location: index.php");
 ?>
 
 
