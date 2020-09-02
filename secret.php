@@ -63,6 +63,7 @@ $result = mysqli_query($link, $commandText);
           <a href="index.php" class="btn btn-outline-primary">回首頁</a>
           <a href="./deposit.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">存款</a>
           <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
+          <a href="./transfer.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">轉帳</a>
           <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
           <input class="btn btn-outline-dark" type="button" value="*" onclick="HideCash(2)">
         </span>
