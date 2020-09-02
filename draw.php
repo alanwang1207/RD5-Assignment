@@ -1,23 +1,30 @@
 <?php
+//按下取消返回秘密頁
 if (isset($_POST["cancelButton"])) {
     header("location: secret.php");
     exit();
 }
+
+//不存在id印出找不到
 if (!isset($_GET["id"])) {
     die("id not found.");
 }
+
+//判斷變數是否為數字或數字的字串
 $id = $_GET["id"];
 if (!is_numeric($id))
     die("id not a number.");
 
-//echo $sql;
+//引入資料庫配置
 require("config.php");
+
+//按下送出取得表單內容
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $dcash = (int)$_POST["dcash"];
 
+    //判斷金額是否足夠
     if ($cash > $dcash) {
-        // var_dump($decash);
         $total = $cash - $dcash;
         $sql = <<<multi
             update user set
@@ -25,7 +32,8 @@ if (isset($_POST["okButton"])) {
             where id = $id
           multi;
         $result = mysqli_query($link, $sql);
-
+        
+        //輸入明細表
         $sql = <<<multi
             insert into detail (uid,decash,dcash,cash,date )
             values
@@ -33,7 +41,6 @@ if (isset($_POST["okButton"])) {
           multi;
         $result = mysqli_query($link, $sql);
         echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
-        //header("location: login.php");
         exit();
     } else {
         echo '<script language="javascript">';
@@ -48,8 +55,6 @@ if (isset($_POST["okButton"])) {
     $row = mysqli_fetch_assoc($result);
 }
 
-//var_dump($row);
-// header("location: index.php");
 ?>
 
 
