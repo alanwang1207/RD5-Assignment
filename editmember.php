@@ -1,7 +1,7 @@
 <?php
 //按下取消返回秘密頁
 if (isset($_POST["cancelButton"])) {
-    header("location: secret.php");
+    header("location: member.php");
     exit();
 }
 
