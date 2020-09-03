@@ -1,36 +1,23 @@
 <?php
-$secret = "";
-//$sUserName = "";
 session_start();
+
+//檢查是否有session
 if (isset($_SESSION["userName"])) {
   $sUserName = $_SESSION["userName"];
 }
 if (!isset($_SESSION["userName"])) {
-  $sUserName = $_SESSION["userName"];
-  $secret = "secret.php";
-  $_SESSION["lastPage"] = $secret;
   header("Location: login.php");
   exit();
 }
+
+//引入資料庫配置
 require_once("config.php");
+
+
 $commandText = <<<SqlQuery
   select id,username,password,cash from user where username='$sUserName';
   SqlQuery;
-// 判斷屏蔽
-// if (isset($_POST["hide"])) {
-//   $commandText = <<<SqlQuery
-// select id,username from user where username='$sUserName';
-// SqlQuery;
-// } else {
-//   // header("Location: index.php");
-//   $commandText = <<<SqlQuery
-//   select id,username,password,cash from user where username='$sUserName';
-//   SqlQuery;
-// }
-
-
 $result = mysqli_query($link, $commandText);
-// var_dump($result);
 
 ?>
 <style>
