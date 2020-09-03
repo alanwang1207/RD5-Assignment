@@ -23,7 +23,6 @@ if (isset($_POST["okButton"])) {
     $username = $_POST["username"];
     $password = base64_encode($_POST["password"]);
     $email = $_POST["email"];
-    echo $id;
     //驗證是否改帳號
     $sql = <<<sqlstate
     select username from user where id = $id;
