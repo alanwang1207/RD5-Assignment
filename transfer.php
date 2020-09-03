@@ -1,8 +1,12 @@
 <?php
+
+//按下取消
 if (isset($_POST["cancelButton"])) {
     header("location: secret.php");
     exit();
 }
+
+//檢查id
 if (!isset($_GET["id"])) {
     die("id not found.");
 }
@@ -10,13 +14,17 @@ $id = $_GET["id"];
 if (!is_numeric($id))
     die("id not a number.");
 
-//echo $sql;
+//引入資料庫配置
 require("config.php");
+
+//按下ok
 if (isset($_POST["okButton"])) {
     $cash = (int)$_POST["cash"];
     $tcash = (int)$_POST["tcash"];
     $muser = $_POST["muser"];
     $total = $cash - $tcash;
+
+    //更新匯款人
     $sql = <<<multi
     update user set
        cash = '$total'
@@ -24,6 +32,7 @@ if (isset($_POST["okButton"])) {
     multi;
     $result = mysqli_query($link, $sql);
 
+    //更新被匯款人
     $sql = <<<multi
     update user set
        cash = cash + $tcash
@@ -32,7 +41,7 @@ if (isset($_POST["okButton"])) {
     $result = mysqli_query($link, $sql);
 
     
-
+//建立匯款人明細
     $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
@@ -40,6 +49,7 @@ if (isset($_POST["okButton"])) {
       multi;
     $result = mysqli_query($link, $sql);
 
+//查詢被匯款人資料做比較
     $sql = <<<multi
     select uid,cash from user where user = '$muser'
     multi;
@@ -48,6 +58,7 @@ if (isset($_POST["okButton"])) {
     $mid = $row["uid"];
     $total = $row["cash"];
 
+//建立被匯款人明細
     $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
