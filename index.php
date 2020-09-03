@@ -1,17 +1,12 @@
 <?php
 session_start();
 $sUserName = "";
-
+//檢查是否有session 
 if (isset($_SESSION["userName"])) {
     $sUserName = $_SESSION["userName"];
 } else {
     $sUserName = "Guest";
 }
-if (isset($_POST["member"])) {
-    header("Location: index.php");
-    exit();
-}
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
