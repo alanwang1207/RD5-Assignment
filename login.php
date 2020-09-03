@@ -1,31 +1,35 @@
 <?php
 session_start();
+
+//按下登出
 if (isset($_GET["logout"])) {
     session_destroy();
     header("Location: index.php");
     exit();
 }
 
+//按下回首頁
 if (isset($_POST["btnHome"])) {
     header("Location: index.php");
     exit();
 }
 
+//按下送出把post值存起來檢查
 if (isset($_POST["btnOK"])) {
     $sUserName = $_POST["txtUserName"];
     $passWord = base64_encode($_POST['txtPassword']);
+
+    //判斷是否為空值
     if (trim($sUserName) != "") {
         echo "Hi {$sUserName} :";
 
+        //引入資料庫配置
         require_once("config.php");
 
-        $link = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $port);
-        mysqli_query($link, "set names utf-8");
+        //驗證帳號是否正確
         $sql = "select `username`,`password` from `user` WHERE `username` = '$sUserName' and `password` = '$passWord'";
-
         $result = mysqli_query($link, $sql);
         $row_count = mysqli_num_rows($result);
-        //var_dump($row_count);
 
 
         $_SESSION["userName"] = $sUserName;
