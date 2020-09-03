@@ -23,27 +23,45 @@ if (isset($_POST["okButton"])) {
     $username = $_POST["username"];
     $password = base64_encode($_POST["password"]);
     $email = $_POST["email"];
-
-    //驗證帳號名稱是否使用
+    echo $id;
+    //驗證是否改帳號
     $sql = <<<sqlstate
-    select username from user where username = '$username';
+    select username from user where id = $id;
   sqlstate;
     $result = mysqli_query($link, $sql);
-    $count = mysqli_num_rows($result);
-    if ($count > 0) {
-
-        echo "<script> alert('帳號名稱已被使用，請重新輸入');location.replace('member.php');</script>";
-    } else {
+    $row = mysqli_fetch_assoc($result);
+    $ousername = $row["username"];
+    if ($username == $ousername) {
         $sql = <<<multi
         update user set
-           username = '$username',
            password='$password',
            email='$email'
-        where id = $id
+        where id = '$id';
       multi;
-        $result = mysqli_query($link, $sql);
+        mysqli_query($link, $sql);
         echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
         exit();
+    } else {
+        //驗證帳號名稱是否使用
+        $sql = <<<sqlstate
+            select username from user where username = '$username';
+            sqlstate;
+        $result = mysqli_query($link, $sql);
+        $count = mysqli_num_rows($result);
+        if ($count > 0) {
+            echo "<script> alert('帳號名稱已被使用，請重新輸入');location.replace('member.php');</script>";
+        } else {
+            $sql = <<<multi
+            update user set
+               username = '$username',
+               password='$password',
+               email='$email'
+            where id = $id
+          multi;
+            $result = mysqli_query($link, $sql);
+            echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
+            exit();
+        }
     }
 } else {
     $sql = <<<multi
