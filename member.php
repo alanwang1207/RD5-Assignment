@@ -1,24 +1,23 @@
 <?php
 $secret = "";
-//$sUserName = "";
+
+//檢查是否有session
 session_start();
 if (isset($_SESSION["userName"])) {
     $sUserName = $_SESSION["userName"];
 }
 if (!isset($_SESSION["userName"])) {
-    $sUserName = $_SESSION["userName"];
-    $secret = "secret.php";
-    $_SESSION["lastPage"] = $secret;
     header("Location: login.php");
     exit();
 }
+
+//引入資料庫配置
 require_once("config.php");
 $commandText = <<<SqlQuery
 select id,username,password,email from user where username='$sUserName';
 SqlQuery;
-
 $result = mysqli_query($link, $commandText);
-// var_dump($result);
+
 
 ?>
 
