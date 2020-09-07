@@ -24,6 +24,13 @@ if (isset($_POST["okButton"])) {
     $muser = $_POST["muser"];
     $total = $cash - $tcash;
 
+    //檢查是否有此人
+    $sql = <<<multi
+    select * from user where username = '$muser'
+    multi;
+    $result = mysqli_query($link, $sql);
+    $count = mysqli_num_rows($result);
+    if($count >0){
     //更新匯款人
     $sql = <<<multi
     update user set
@@ -67,6 +74,10 @@ if (isset($_POST["okButton"])) {
     $result = mysqli_query($link, $sql);
     echo "<script> alert('匯款完成，將跳回會員頁');location.replace('secret.php');</script>";
     exit();
+    }else{
+        echo "<script> alert('查無此人，將跳回會員頁');location.replace('secret.php');</script>";
+    }
+
 } else {
     $sql = <<<multi
     select * from user where id = $id
