@@ -30,54 +30,53 @@ if (isset($_POST["okButton"])) {
     multi;
     $result = mysqli_query($link, $sql);
     $count = mysqli_num_rows($result);
-    if($count >0){
-    //更新匯款人
-    $sql = <<<multi
+    if ($count > 0) {
+        //更新匯款人
+        $sql = <<<multi
     update user set
        cash = '$total'
     where id = '$id'
     multi;
-    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
-    //更新被匯款人
-    $sql = <<<multi
+        //更新被匯款人
+        $sql = <<<multi
     update user set
        cash = cash + $tcash
     where username = '$muser'
     multi;
-    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
-    
-//建立匯款人明細
-    $sql = <<<multi
+
+        //建立匯款人明細
+        $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
         ($id,0,$tcash,$total,current_timestamp() )
       multi;
-    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
-//查詢被匯款人資料做比較
-    $sql = <<<multi
-    select uid,cash from user where user = '$muser'
+        //查詢被匯款人資料做比較
+        $sql = <<<multi
+    select id,cash from user where username = '$muser'
     multi;
-    $result = mysqli_query($link, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $mid = $row["uid"];
-    $total = $row["cash"];
+        $result = mysqli_query($link, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $mid = $row["id"];
+        $total = $row["cash"];
 
-//建立被匯款人明細
-    $sql = <<<multi
+        //建立被匯款人明細
+        $sql = <<<multi
         insert into detail (uid,decash,dcash,cash,date )
         values
         ($mid,$tcash,0,$total,current_timestamp() )
       multi;
-    $result = mysqli_query($link, $sql);
-    echo "<script> alert('匯款完成，將跳回會員頁');location.replace('secret.php');</script>";
-    exit();
-    }else{
+        $result = mysqli_query($link, $sql);
+        echo "<script> alert('匯款完成，將跳回會員頁');location.replace('secret.php');</script>";
+        exit();
+    } else {
         echo "<script> alert('查無此人，將跳回會員頁');location.replace('secret.php');</script>";
     }
-
 } else {
     $sql = <<<multi
     select * from user where id = $id
@@ -121,7 +120,7 @@ if (isset($_POST["okButton"])) {
             <div class="form-group row">
                 <label for="muser" class="col-4 col-form-label">匯款帳號:</label>
                 <div class="col-8">
-                    <input  id="muser" name="muser" value="<?= $row["muser"] ?>" type="text" class="form-control">
+                    <input id="muser" name="muser" value="<?= $row["muser"] ?>" type="text" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
