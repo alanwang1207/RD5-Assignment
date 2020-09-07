@@ -1,0 +1,33 @@
+.box-margins {
+	margin-right: 50px;
+	margin-top: 40px;
+}
+#tt{
+	font-family: "微軟正黑體";
+	font-size: 13pt;
+	color: #df0e0e;
+	line-height: 150%;
+	font-weight: bold;
+}
+body {
+	background-color: #f0f5f8;
+	font-family: "微軟正黑體";
+}
+
+h3 {
+	font-family: "微軟正黑體";
+	font-size: 13pt;
+	color: #000000;
+	line-height: 150%;
+	font-weight: bold;
+}
+h1{
+	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+}
+h2{
+	color: rgba(0,0,0,0.6);
+
+text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+
+                 0px -5px 35px rgba(255,255,255,0.3);
+}
