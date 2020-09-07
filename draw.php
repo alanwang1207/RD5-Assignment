@@ -24,7 +24,7 @@ if (isset($_POST["okButton"])) {
     $dcash = (int)$_POST["dcash"];
 
     //判斷金額是否足夠
-    if ($cash > $dcash) {
+    if ($cash >= $dcash) {
         $total = $cash - $dcash;
         $sql = <<<multi
             update user set
@@ -43,9 +43,7 @@ if (isset($_POST["okButton"])) {
         echo "<script> alert('提款完成，將跳回會員頁');location.replace('secret.php');</script>";
         exit();
     } else {
-        echo '<script language="javascript">';
-        echo 'alert("您的餘額不足")';
-        echo '</script>';
+        echo "<script> alert('餘額不足');location.replace('secret.php');</script>";
     }
 } else {
     $sql = <<<multi
