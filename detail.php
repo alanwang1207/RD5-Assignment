@@ -20,7 +20,7 @@ require("config.php");
 
 //秀出明細
 $sql = <<<multi
-    select decash,dcash,cash,date from detail  where uid = $id
+    select muser,decash,dcash,cash,date from detail  where uid = $id
   multi;
 $result = mysqli_query($link, $sql);
 ?>
@@ -48,6 +48,7 @@ $result = mysqli_query($link, $sql);
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>帳號</th>
                         <th>存款</th>
                         <th>提款</th>
                         <th>目前金額</th>
@@ -57,7 +58,7 @@ $result = mysqli_query($link, $sql);
                 <tbody>
                     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
-
+                            <td><?= $row["muser"] ?></td>
                             <?php if ($row["decash"] == '0') : ?>
                                 <td><?= '-' ?></td>
                             <?php else : ?>
