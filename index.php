@@ -24,7 +24,12 @@ if (isset($_SESSION["userName"])) {
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-
+<!-- 顯示提示字特效 -->
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <body>
 
     <div class="container">
@@ -34,8 +39,8 @@ if (isset($_SESSION["userName"])) {
         <span>
             
                 <td>
-                <a href="secret.php" id="member" type="submit" class="btn btn-outline-info">戶頭管理</a>
-                <a href="member.php" id="member" type="submit" class="btn btn-outline-primary">會員中心</a>
+                <a href="secret.php" id="member" type="submit" class="btn btn-outline-info" data-toggle="tooltip" title="存款提款查看明細">戶頭管理</a>
+                <a href="member.php" id="member" type="submit" class="btn btn-outline-primary" data-toggle="tooltip" title="修改會員資料">會員中心</a>
 
                 </td>
                 <?php if ($sUserName == "Guest") : ?>

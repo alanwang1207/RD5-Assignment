@@ -39,7 +39,12 @@ $result = mysqli_query($link, $commandText);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RD5 - 戶頭頁</title>
 </head>
-
+<!-- 顯示提示字特效 -->
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <body>
   <form method="post">
     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -52,7 +57,7 @@ $result = mysqli_query($link, $commandText);
           <a href="./draw.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">提款</a>
           <a href="./transfer.php?id=<?= $row["id"] ?>" class="btn btn-outline-info">轉帳</a>
           <a href="./detail.php?id=<?= $row["id"] ?>" class="btn btn-outline-secondary">查詢明細</a>
-          <input class="btn btn-outline-dark" type="button" value="*" onclick="HideCash(2)">
+          <input class="btn btn-outline-dark" type="button" value="*" onclick="HideCash(2)" data-toggle="tooltip" title="屏蔽餘額">
         </span>
         <table class="table table-striped">
           <thead>
