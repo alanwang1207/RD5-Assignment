@@ -14,6 +14,7 @@ CREATE TABLE `user` (
 CREATE TABLE `detail`(
   `did` int NOT NULL auto_increment primary key,
   `uid` int not null,
+  `muser` varchar(30) not null,
   `cash` int,
   `decash` int default 0,
   `dcash` int default 0,

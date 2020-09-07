@@ -34,9 +34,9 @@ if (isset($_POST["okButton"])) {
 
     //輸入明細
     $sql = <<<multi
-        insert into detail (uid,decash,dcash,cash,date )
+        insert into detail (uid,muser,decash,dcash,cash,date )
         values
-        ($id,$decash,0,$total,current_timestamp() )
+        ($id,"-",$decash,0,$total,current_timestamp() )
       multi;
     $result = mysqli_query($link, $sql);
     echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
