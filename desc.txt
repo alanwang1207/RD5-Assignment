@@ -1,0 +1,20 @@
+Index
+簡單分為金錢操作的戶頭管理頁以及修改會員資料的會員中心頁
+
+Secret
+金錢操作的選項(存款 提款 轉帳 查詢明細)
+*為屏蔽餘額 這一頁用簡單的select語句查詢user表 不顯示密碼 只顯示帳號及餘額
+
+Deposit
+存款頁將id get過來 再用select語句選出來目前金額 輸入存放金額使用post 做update以及insert到明細表
+
+Draw
+提款頁將id get過來 再用select語句選出來目前金額 輸入提款金額使用post 做update以及insert到明細表
+
+Transfer
+轉帳頁則是兩個update 兩個insert 使用post將匯款人及匯款金額做update
+
+Detail
+查詢明細的帳號欄位 
+如果是匯款人 則是會顯示轉帳給XXX 而匯款金額會放在提款那列
+被匯款人則是會顯示XXX已匯款 匯款金額放在存款那列
