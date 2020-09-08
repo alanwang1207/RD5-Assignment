@@ -54,7 +54,7 @@ if (isset($_POST["okButton"])) {
         $sql = <<<multi
         insert into detail (uid,muser,decash,dcash,cash,date )
         values
-        ($id,'$muser',0,$tcash,$total,current_timestamp() )
+        ($id,'轉帳給$muser',0,$tcash,$total,current_timestamp() )
       multi;
         $result = mysqli_query($link, $sql);
 
@@ -71,7 +71,7 @@ if (isset($_POST["okButton"])) {
         $sql = <<<multi
         insert into detail (uid,muser,decash,dcash,cash,date )
         values
-        ($mid,'$sUserName',$tcash,0,$total,current_timestamp() )
+        ($mid,'$sUserName 已轉帳',$tcash,0,$total,current_timestamp() )
       multi;
         $result = mysqli_query($link, $sql);
         echo "<script> alert('匯款完成，將跳回會員頁');location.replace('secret.php');</script>";
