@@ -21,7 +21,7 @@ require("config.php");
 //秀出明細
 $sql = <<<multi
     select muser,decash,dcash,cash,date from detail  where uid = $id
-  multi;
+multi;
 $result = mysqli_query($link, $sql);
 ?>
 

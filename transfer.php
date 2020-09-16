@@ -29,7 +29,7 @@ if (isset($_POST["okButton"])) {
     //檢查是否有此人
     $sql = <<<multi
     select * from user where username = '$muser'
-    multi;
+multi;
     $result = mysqli_query($link, $sql);
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -38,7 +38,7 @@ if (isset($_POST["okButton"])) {
     update user set
        cash = '$total'
     where id = '$id'
-    multi;
+multi;
         $result = mysqli_query($link, $sql);
 
         //更新被匯款人
@@ -46,7 +46,7 @@ if (isset($_POST["okButton"])) {
     update user set
        cash = cash + $tcash
     where username = '$muser'
-    multi;
+multi;
         $result = mysqli_query($link, $sql);
 
 
@@ -55,13 +55,13 @@ if (isset($_POST["okButton"])) {
         insert into detail (uid,muser,decash,dcash,cash,date )
         values
         ($id,'轉帳給$muser',0,$tcash,$total,current_timestamp() )
-      multi;
+multi;
         $result = mysqli_query($link, $sql);
 
         //查詢被匯款人資料做比較
         $sql = <<<multi
     select id,cash from user where username = '$muser'
-    multi;
+multi;
         $result = mysqli_query($link, $sql);
         $row = mysqli_fetch_assoc($result);
         $mid = $row["id"];
@@ -72,7 +72,7 @@ if (isset($_POST["okButton"])) {
         insert into detail (uid,muser,decash,dcash,cash,date )
         values
         ($mid,'$sUserName 已轉帳',$tcash,0,$total,current_timestamp() )
-      multi;
+multi;
         $result = mysqli_query($link, $sql);
         echo "<script> alert('匯款完成，將跳回會員頁');location.replace('secret.php');</script>";
         exit();
@@ -82,7 +82,7 @@ if (isset($_POST["okButton"])) {
 } else {
     $sql = <<<multi
     select * from user where id = $id
-  multi;
+multi;
     $result = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($result);
 }

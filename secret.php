@@ -16,7 +16,7 @@ require_once("config.php");
 
 $commandText = <<<SqlQuery
   select id,username,password,cash from user where username='$sUserName';
-  SqlQuery;
+SqlQuery;
 $result = mysqli_query($link, $commandText);
 
 ?>

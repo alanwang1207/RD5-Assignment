@@ -26,7 +26,7 @@ if (isset($_POST["okButton"])) {
     //驗證是否改帳號
     $sql = <<<sqlstate
     select username from user where id = $id;
-  sqlstate;
+sqlstate;
     $result = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($result);
     $ousername = $row["username"];
@@ -36,7 +36,7 @@ if (isset($_POST["okButton"])) {
            password='$password',
            email='$email'
         where id = '$id';
-      multi;
+multi;
         mysqli_query($link, $sql);
         echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
         exit();
@@ -56,7 +56,7 @@ if (isset($_POST["okButton"])) {
                password='$password',
                email='$email'
             where id = $id
-          multi;
+multi;
             $result = mysqli_query($link, $sql);
             echo "<script> alert('修改完成，請重新登入');location.replace('login.php');</script>";
             exit();
@@ -65,7 +65,7 @@ if (isset($_POST["okButton"])) {
 } else {
     $sql = <<<multi
     select * from user where id = $id
-  multi;
+multi;
     $result = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($result);
 }

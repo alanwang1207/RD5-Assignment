@@ -24,7 +24,7 @@ sqlstate;
             $sql = <<<sqlstate
         insert into user (username,password,tid,email,cash)
         values('$userName','$passWord','$tid','$email','$cash')
-      sqlstate;
+sqlstate;
             mysqli_query($link, $sql);
             echo "<script> alert('加入成功，請重新登入');location.replace('login.php');</script>";
         } else {

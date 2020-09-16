@@ -29,7 +29,7 @@ if (isset($_POST["okButton"])) {
     update user set
        cash = '$total'
     where id = $id
-    multi;
+multi;
     $result = mysqli_query($link, $sql);
 
     //輸入明細
@@ -37,14 +37,14 @@ if (isset($_POST["okButton"])) {
         insert into detail (uid,muser,decash,dcash,cash,date )
         values
         ($id,"-",$decash,0,$total,current_timestamp() )
-      multi;
+multi;
     $result = mysqli_query($link, $sql);
     echo "<script> alert('存款完成，將跳回會員頁');location.replace('secret.php');</script>";
     exit();
 } else {
     $sql = <<<multi
     select * from user where id = $id
-  multi;
+multi;
     $result = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($result);
 }
