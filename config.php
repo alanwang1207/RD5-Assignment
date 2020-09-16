@@ -11,18 +11,3 @@ $link = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $port);
 mysqli_query($link, "set names utf-8");
 
 ?> 
-
-<!-- MAMP -->
-<!-- 
-<?php
-
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'root';
-$dbname = 'rd5';
-$port = 8889;
-$link = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $port);
-mysqli_query($link, "set names utf-8");
-
-?> 
--->
